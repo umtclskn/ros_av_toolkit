@@ -1,0 +1,11 @@
+perception_lidar_preprocess:
+  ros__parameters:
+    publisher_url: "perception/lidar/preprocess"
+    subscription_url: "kitti/point_cloud"
+    region_extract_removed_indices: true
+    region_roof_negative_bool: true
+    region_min: [-20.0, -5.5, -2.0, 1.0]
+    region_max: [30.0, 5.5, 5.0, 1.0]
+    region_roof_min: [-1.5, -1.4, -2.0, 1.0]
+    region_roof_max: [2.7, 1.4, 0.0, 1.0]
+    leaf_size: 0.3

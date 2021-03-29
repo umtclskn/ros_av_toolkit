@@ -1,0 +1,7 @@
+perception_lidar_ground_filter:
+  ros__parameters:
+    publisher_inliers_url: "perception/lidar/ground_filter_inliers"
+    publisher_outliers_url: "perception/lidar/ground_filter_outliers"
+    subscription_url: "perception/lidar/preprocess"
+    max_iteration: 96
+    distance_tolerance: 0.28

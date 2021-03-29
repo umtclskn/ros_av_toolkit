@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="ros_av_toolkit" exec="perception_lidar_preprocess" output="screen" />
+  <node pkg="ros_av_toolkit" exec="perception_lidar_ground_filter" output="screen" />
+  <node pkg="ros_av_toolkit" exec="perception_lidar_cluster" output="screen" />
+  <node pkg="ros_av_toolkit" exec="perception_lidar_bounding_box" output="screen" />
+</launch>
