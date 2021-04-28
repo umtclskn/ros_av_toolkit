@@ -1,4 +1,4 @@
-perception_lidar_preprocess:
+preprocess:
   ros__parameters:
     publisher_url: "perception/lidar/preprocess"
     subscription_url: "kitti/point_cloud"

@@ -25,32 +25,32 @@ def generate_launch_description():
 
 
     preprocess_params= os.path.join(
-        get_package_share_directory('ros_av_toolkit'),
+        get_package_share_directory('ros_av_toolkit_perception_lidar'),
         'config',
         'preprocess_params.yaml'
     )
 
     ground_filter_params = os.path.join(
-        get_package_share_directory('ros_av_toolkit'),
+        get_package_share_directory('ros_av_toolkit_perception_lidar'),
         'config',
         'ground_filter_params.yaml'
     )
 
     cluster_params = os.path.join(
-        get_package_share_directory('ros_av_toolkit'),
+        get_package_share_directory('ros_av_toolkit_perception_lidar'),
         'config',
         'cluster_params.yaml'
     )
 
     bounding_box_params = os.path.join(
-        get_package_share_directory('ros_av_toolkit'),
+        get_package_share_directory('ros_av_toolkit_perception_lidar'),
         'config',
         'bounding_box_params.yaml'
     )
 
     return LaunchDescription([
-        launch_ros.actions.Node(package='ros_av_toolkit', executable='perception_lidar_preprocess', name='perception_lidar_preprocess',output='screen', parameters=[preprocess_params]),
-        launch_ros.actions.Node(package='ros_av_toolkit', executable='perception_lidar_ground_filter', name='perception_lidar_ground_filter', output='screen', parameters=[ground_filter_params]),
-        launch_ros.actions.Node(package='ros_av_toolkit', executable='perception_lidar_cluster', name='perception_lidar_cluster', output='screen', parameters=[cluster_params]),
-        launch_ros.actions.Node(package='ros_av_toolkit', executable='perception_lidar_bounding_box', name='perception_lidar_bounding_box', output='screen', parameters=[bounding_box_params])
+        launch_ros.actions.Node(package='ros_av_toolkit_perception_lidar', executable='preprocess', name='preprocess',output='screen', parameters=[preprocess_params]),
+        launch_ros.actions.Node(package='ros_av_toolkit_perception_lidar', executable='ground_filter', name='ground_filter', output='screen', parameters=[ground_filter_params]),
+        launch_ros.actions.Node(package='ros_av_toolkit_perception_lidar', executable='cluster', name='cluster', output='screen', parameters=[cluster_params]),
+        launch_ros.actions.Node(package='ros_av_toolkit_perception_lidar', executable='bounding_box', name='bounding_box', output='screen', parameters=[bounding_box_params])
     ])

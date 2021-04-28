@@ -1,4 +1,4 @@
-perception_lidar_cluster:
+cluster:
   ros__parameters:
     publisher_cluster_url: "perception/lidar/cluster"
     publisher_cluster_merged_points_url: "perception/lidar/cluster_merged_points"

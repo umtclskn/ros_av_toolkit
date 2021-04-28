@@ -1,4 +1,4 @@
-perception_lidar_bounding_box:
+bounding_box:
   ros__parameters:
     publisher_url: "perception/lidar/bounding_box"
     subscription_url: "perception/lidar/cluster"

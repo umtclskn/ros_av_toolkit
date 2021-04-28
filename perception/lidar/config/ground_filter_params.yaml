@@ -1,4 +1,4 @@
-perception_lidar_ground_filter:
+ground_filter:
   ros__parameters:
     publisher_inliers_url: "perception/lidar/ground_filter_inliers"
     publisher_outliers_url: "perception/lidar/ground_filter_outliers"

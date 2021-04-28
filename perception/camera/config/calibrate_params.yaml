@@ -1,0 +1,5 @@
+calibrate:
+  ros__parameters:
+    publisher_url: "perception/camera/calibrated_image"
+    subscription_url: "kitti/image/color/left"
+    service_url: "ros_av_interfaces/camera_info"

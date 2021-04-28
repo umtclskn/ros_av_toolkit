@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(ros_av_toolkit_perception_lidar)
+project(ros_av_toolkit_perception_camera)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -24,11 +24,13 @@ find_package(PCL REQUIRED QUIET COMPONENTS core features filters io segmentation
 find_package(pcl_conversions REQUIRED)
 find_package(pcl_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(ros_av_interfaces REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(OpenCV REQUIRED)
 
 include_directories(
   include
@@ -48,26 +50,29 @@ function(custom_executable subfolder target)
     "pcl_conversions"
     "sensor_msgs"
     "av_toolkit_custom_msgs"
+    "ros_av_interfaces"
     "geometry_msgs"
     "visualization_msgs"
     "tf2"
     "tf2_geometry_msgs"
     "tf2_ros"
     "EIGEN3"
-    "PCL")
+    "PCL"
+    "OpenCV")
   install(TARGETS ${target}
   DESTINATION lib/${PROJECT_NAME})
 endfunction()
 
-function(add_demo_dependencies library)
+function(add_camera_dependencies library)
   target_compile_definitions(${library}
-    PRIVATE "PERCEPTION_LIDAR_BUILDING_DLL")
+    PRIVATE "PERCEPTION_CAMERA_BUILDING_DLL")
   ament_target_dependencies(${library}
     "example_interfaces"
     "rclcpp"
     "rcutils"
     "std_msgs"
     "av_toolkit_custom_msgs"
+    "ros_av_interfaces"
     "pcl_conversions"
     "pcl_msgs"
     "sensor_msgs"
@@ -77,36 +82,27 @@ function(add_demo_dependencies library)
     "tf2_geometry_msgs"
     "tf2_ros"
     "EIGEN3"
-    "PCL")
-  target_link_libraries(${library} ${PCL_LIBRARIES})
+    "PCL"
+    "OpenCV")
+  target_link_libraries(${library} ${PCL_LIBRARIES} ${OpenCV_LIBS})
 endfunction()
 
 
 
-add_library(perception_lidar_topics_library SHARED
-  src/topics/preprocess.cpp
-  src/topics/ground_filter.cpp
-  src/topics/cluster.cpp
-  src/topics/bounding_box.cpp)
+add_library(perception_camera_topics_library SHARED
+  src/topics/calibrate.cpp
+  )
 
-add_demo_dependencies(perception_lidar_topics_library)
+add_camera_dependencies(perception_camera_topics_library)
 
 
-rclcpp_components_register_node(perception_lidar_topics_library
-  PLUGIN "lidar::Preprocess"
-  EXECUTABLE preprocess)
-rclcpp_components_register_node(perception_lidar_topics_library
-  PLUGIN "lidar::GroundFilter"
-  EXECUTABLE ground_filter)
-rclcpp_components_register_node(perception_lidar_topics_library
-  PLUGIN "lidar::Cluster"
-  EXECUTABLE cluster)
-rclcpp_components_register_node(perception_lidar_topics_library
-  PLUGIN "lidar::BoundingBox"
-  EXECUTABLE bounding_box)
+rclcpp_components_register_node(perception_camera_topics_library
+  PLUGIN "camera::Calibrate"
+  EXECUTABLE calibrate)
+
 
 install(TARGETS
-  perception_lidar_topics_library
+  perception_camera_topics_library
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)

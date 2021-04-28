@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="ros_av_toolkit_perception_camera" exec="calibrate" output="screen" />
+</launch>
